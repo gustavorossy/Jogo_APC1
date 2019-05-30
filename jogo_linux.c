@@ -21,17 +21,13 @@ int getch(void)
     tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
     return ch;
 }
-void clrscr()
-{
-    system("cls||clear");
-}
 
 int main() {
     int i, j, y=(COLUNAS/2), x=(LINHAS/2);
     char mapa[LINHAS][COLUNAS], andar;
 
     while (1) {
-        //printf("\033[H\033[J");
+        printf("\033[H\033[J");
         for(i=0; i<LINHAS; i++){
             for(j=0; j<COLUNAS; j++){
                 if(j==0|| j==(COLUNAS-1)) mapa[i][j]=':';
@@ -75,8 +71,6 @@ int main() {
             x++;
             mapa[x][y]='0';
         }
-        clrscr();
     } //END WHILE
     return 0;
 }
-
