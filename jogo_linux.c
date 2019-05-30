@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <time.h>
 
-#define COLUNAS 91
-#define LINHAS 41
+#define COLUNAS 84
+#define LINHAS 38
 
 
 /* reads from keypress, doesn't echo */
