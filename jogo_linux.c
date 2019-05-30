@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#define COLUNAS 84
+#define COLUNAS 150
 #define LINHAS 38
 
 
