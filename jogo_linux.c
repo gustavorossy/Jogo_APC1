@@ -1,16 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include <time.h>
 
-#define COLUNAS 60
-#define LINHAS 27
+#define COLUNAS 91
+#define LINHAS 41
 
 
 /* reads from keypress, doesn't echo */
-int getch(void)
-{
+int getch(void){
     struct termios oldattr, newattr;
     int ch;
     tcgetattr( STDIN_FILENO, &oldattr );
@@ -23,21 +22,28 @@ int getch(void)
 }
 
 int main() {
-    int i, j, y=(COLUNAS/2), x=(LINHAS/2);
+    int i, j, y, x;
     char mapa[LINHAS][COLUNAS], andar;
+    srand( (unsigned)time(NULL) );
+
+    for(i=0; i<LINHAS; i++){
+        for(j=0; j<COLUNAS; j++){
+            if(j==0|| j==(COLUNAS-1)) mapa[i][j]=':';
+            else if(i!=0 && i!=(LINHAS-1) && mapa[i][j]!='#') mapa[i][j]=' ';
+            if(i==0 || i==(LINHAS-1)) mapa[i][j]='=';
+        }
+    }
+    for(i=0;i<250;i++){
+        x=1+rand()%(LINHAS-2);
+        y=1+rand()%(COLUNAS-2);
+        mapa[x][y]='#';
+    }
+    y=(COLUNAS/2);
+    x=(LINHAS/2);
 
     while (1) {
-        printf("\033[H\033[J");
-        for(i=0; i<LINHAS; i++){
-            for(j=0; j<COLUNAS; j++){
-                if(j==0|| j==(COLUNAS-1)) mapa[i][j]=':';
-                else if(i!=0 || i!=(LINHAS-1)) mapa[i][j]=' ';
-                if(i==0 || i==(LINHAS-1)) mapa[i][j]='=';
-
-            }
-        }
         mapa[x][y]='0';
-        //printf("\nMAPA[%i][%i]= %c\n\n", x, y, mapa[x][y]);
+        printf("\033[H\033[J");
         for(i=0; i<LINHAS; i++){
             for(j=0; j<COLUNAS; j++){
                 printf("%c", mapa[i][j]);
@@ -48,29 +54,34 @@ int main() {
         printf("Utilize as telas W A S D para se mover: ");
         andar=getch();
         if(andar=='w' || andar=='W'){//cima
-            //printf("CIMA");
-            mapa[x][y]=' ';
-            x--;
-            mapa[x][y]=='0';
+            if(mapa[x-1][y]!='#'){
+                mapa[x][y]=' ';
+                x--;
+                mapa[x][y]=='0';
+            }
         }
         else if(andar=='a' || andar=='A'){//esquerda
-            //printf("ESQUERDA");
-            mapa[x][y]=' ';
-            y--;
-            mapa[x][y]='0';
+            if(mapa[x][y-1]!='#'){
+                mapa[x][y]=' ';
+                y--;
+                mapa[x][y]='0';
+            }
         }
         else if(andar=='d' || andar=='D'){//direita
-            //printf("DIREITA");
-            mapa[x][y]=' ';
-            y++;
-            mapa[x][y]='0';
+            if(mapa[x][y+1]!='#'){
+                mapa[x][y]=' ';
+                y++;
+                mapa[x][y]='0';
+            }
         }
         else if(andar=='s' || andar=='S'){//baixo
-            //printf("BAIXO");
-            mapa[x][y]=' ';
-            x++;
-            mapa[x][y]='0';
+            if(mapa[x+1][y]!='#'){
+                mapa[x][y]=' ';
+                x++;
+                mapa[x][y]='0';
+            }
         }
+        printf("\033[H\033[J");
     } //END WHILE
     return 0;
 }
