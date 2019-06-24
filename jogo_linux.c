@@ -33,7 +33,7 @@ int main() {
     x=(LINHAS/2);
     mapa[x][y]='0';
     desenha_mapa();
-    introducao();
+    //introducao();
     while (1) {
         mapa[x][y]='0';
 
@@ -46,23 +46,23 @@ int main() {
             if(mapa[x-1][y]=='?'){
                 resultado=quests();
                 if(resultado==1){
-                    mapa[x-1][y]=='!';
+                    mapa[x-1][y]='!';
                 }
             }
-            else if(mapa[x-1][y]!='#'){
+            else if(mapa[x-1][y]==' '){
                 mapa[x][y]=' ';
                 x--;
-                mapa[x][y]=='0';
+                mapa[x][y]='0';
             }
         }
         else if(andar=='a' || andar=='A'){//esquerda
             if(mapa[x][y-1]=='?'){
                 resultado=quests();
                 if(resultado==1){
-                    mapa[x][y-1]=='!';
+                    mapa[x][y-1]='!';
                 }
             }
-            else if(mapa[x][y-1]!='#'){
+            else if(mapa[x][y-1]==' '){
                 mapa[x][y]=' ';
                 y--;
                 mapa[x][y]='0';
@@ -72,10 +72,10 @@ int main() {
             if(mapa[x][y+1]=='?'){
                 resultado=quests();
                 if(resultado==1){
-                    mapa[x][y+1]=='!';
+                    mapa[x][y+1]='!';
                 }
             }
-            else if(mapa[x][y+1]!='#'){
+            else if(mapa[x][y+1]==' '){
                 mapa[x][y]=' ';
                 y++;
                 mapa[x][y]='0';
@@ -85,15 +85,16 @@ int main() {
             if(mapa[x+1][y]=='?'){
                 resultado=quests();
                 if(resultado==1){
-                    mapa[x+1][y]=='!';
+                    mapa[x+1][y]='!';
                 }
             }
-            else if(mapa[x+1][y]!='#'){
+            else if(mapa[x+1][y]==' '){
                 mapa[x][y]=' ';
                 x++;
                 mapa[x][y]='0';
             }
         }
+        system("clear");
         system("clear");
     } //END WHILE
     return 0;
@@ -196,9 +197,10 @@ int quests(){
     srand( (unsigned)time(NULL) );
     int a, i, result=0, x, y;
     char c;
-    a=rand()%3;
+    //a=rand()%3;
+    a=5;
     if(a==0){
-        printf("Qual sera a saida do codigo a seguir?\n\n");
+        printf("\n\nQual sera a saida do codigo a seguir?\n\n");
         printf("#include <stdio.h>\n\nint main()\n{\n  const int a = 5;\n  a++;\n  printf(\"%%d\", a)\n  return 0;\n}\n");
         printf("A) 5\nB) 6\nC) Runtime error\nD) Compile error\n");
         printf("Resposta: ");
@@ -217,8 +219,8 @@ int quests(){
             result=0;
         }
     }
-    else if (a==1){
-        printf("O que a linha a seguir define?\n\n");
+    else if(a==1){
+        printf("\n\nO que a linha a seguir define?\n\n");
         printf("int *ptr[10];\n\n");
         printf("A) ptr é um ponteiro para um vetor inteiro de 10 ponteiros\n");
         printf("B) ptr é um vetor de 10 ponteiros para inteiros\n");
@@ -241,7 +243,7 @@ int quests(){
         }
     }
     else if(a==2){
-        printf("\nQual será a saída do programa a seguir:\n\n");
+        printf("\n\nQual será a saída do programa a seguir:\n\n");
         printf("#include <stdio.h>\n\nint main(){\n  char s[]=\"hello\", t[]=\"hello\";\n\n");
         printf("  if(s==t){\n    printf(\"strings iguais\");\n  }\n}\n\n");
         printf("A) strings iguais\n");
@@ -264,7 +266,85 @@ int quests(){
             result=0;
         }
     }
-
+    else if(a==3){
+        printf("\n\nQual sera a saida do codigo a seguir:\n\n");
+        printf("#include <stdio.h>\n\nint main(){\n  int a=5, b=3, c=4;\n\n  printf(\"a=%%d, b=%%d\", a, b, c)\n  return 0;\n}\n");
+        printf("\nA) a=5, b=3\nB) a=5, b=3, c=4\nC) a=5, b=3 4\nD) Compile error\n");
+        printf("Resposta: ");
+        scanf("%c", &c);
+        if(c=='a' || c=='A'){
+            resposta_certa();
+            sleep(6);
+            //vida(+1);
+            result=1;
+        }
+        else{
+            resposta_errada();
+            sleep(6);
+            //vida(-1);
+            result=0;
+        }
+    }
+    else if(a==4){
+        printf("\n\nQual sera a saida do codigo a seguir:\n\n");
+        printf("#include<stdio.h>\n\nint main() {\n  int a = 1.3;\n  float b = 1.0;\n  double c;\n  c = a + b;\n  printf(\"%%.2lf\", c);\n  return 0;\n}\n\n");
+        printf("A) 2.30\nB) 2.3\nC) Compile error\nD) 2.0\n");
+        printf("Resposta: ");
+        scanf("%c", &c);
+        if(c=='d' || c=='D'){
+            resposta_certa();
+            sleep(6);
+            //vida(+1);
+            result=1;
+        }
+        else{
+            resposta_errada();
+            sleep(6);
+            //vida(-1);
+            result=0;
+        }
+    }
+    else if(a==5){
+        printf("\n\nQual sera a saida do programa a seguir: \n\n");
+        printf("#include <stdio.h>\n\nint main() {\n  char c='A'+255;\n\n  printf(\"%%c\", c);\n  return 0;\n}\n");
+        printf("\nA) A\nB) B\nC) Overflow error at runtime\nCompile error\n");
+        printf("Resposta: ");
+        scanf("%c", &c);
+        if(c=='c' || c=='C'){
+            resposta_certa();
+            sleep(6);
+            //vida(+1);
+            result=1;
+        }
+        else{
+            resposta_errada();
+            sleep(6);
+            //vida(-1);
+            result=0;
+        }
+    }
+    else if(a==6){
+        printf("\n\nQual será a saída do programa a seguir?\n\n");
+        printf("\n#include<stdio.h>\n\nint main(){\n  short unsigned int i=0;\n  printf(\"%%u\", i--);\n  return 0;\n}");
+        printf("A) 0\nB) Compile error\nC) 65535\nD) 32767\n");
+        printf("Resposta: ");
+        scanf("%c", &c);
+        if(c=='a' || c=='A'){
+            resposta_certa();
+            sleep(6);
+            //vida(+1);
+            result=1;
+        }
+        else{
+            resposta_errada();
+            sleep(6);
+            //vida(-1);
+            result=0;
+        }
+    }
+    else if(a==7){
+        
+    }
     return result;
 }
 
