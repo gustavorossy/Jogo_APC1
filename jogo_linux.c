@@ -371,3 +371,4 @@ void resposta_errada(){
     if(i==4) printf("Acho melhor você arrumar umas colas, já que está tão dificil assim. Ah, quase me esqueço da vida!\n");
     if(i==5) printf("Errrrou!\n");
 }
+
